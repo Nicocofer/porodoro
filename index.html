@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<link rel="stylesheet" href="/node_modules/flipclock/compiled/flipclock.css">
+	<link rel="stylesheet" type="text/css" href="dist/css/main.css">
+	<title>Porodoro App</title>
+</head>
+<body class="blue darken-2">
+	<main>
+		<div class="row">
+			<div class="col s1 offset-s4 ">
+				<img id="poro" src="dist/img/poro.png">
+			</div>
+			<h1 class="col s4 left-align">Porodoro App</h1>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col s4 offset-s4 white">
+					<div class="input-field inline col s12 ">
+						<input id="task" type="text" >
+						<label for="task">Ajouter une tâche</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<h5 class="center-align col s2 offset-s1">Todo</h5>
+				<h5 class="center-align col s2 offset-s2">Timer</h5>
+				<h5 class="center-align col s2 offset-s2">Completed</h5>
+			</div>
+			<div class="row">
+				<div class="col s4  colonne" id="todo">
+				</div>
+				<div class="col s4  center-align colonne">
+					<div class="horloge">
+						<!-- <div class="your-clock" id="timer-clock"></div> --> <!-- flipclock -->
+
+						<div id="clockdiv">
+							<div>
+								<span class="minutes" id="min">25</span>
+								<div class="smalltext">Minutes</div>
+							</div>
+							<div>
+								<span class="seconds" id="sec">00</span>
+								<div class="smalltext">Seconds</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="row">
+						<a id="play" class="waves-effect waves-light btn blue-text text-darken-2 white">PLAY</a>
+						<a id="pause" class="waves-effect waves-light btn blue-text text-darken-2 white hidden">PAUSE</a>
+						<a id="continue" class="waves-effect waves-light btn blue-text text-darken-2 white hidden">CONTINUE</a>
+						<a id="restart" class="waves-effect waves-light btn blue-text text-darken-2 white hidden">RESTART</a>
+					</div>
+					<a class="waves-effect waves-light btn blue-text text-darken-2 white" id="end-btn">FINI</a>
+					<h4 class="white-text">Tâche en cours :</h4>
+					<div id="enCours"></div>
+				</div>
+				<div class="col s4  colonne" id="tacheEnd">
+				</div>
+			</div>
+		</div>
+
+
+
+	</main>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+	<script src="/node_modules/flipclock/compiled/flipclock.min.js"></script>
+	<script type="text/javascript" src="dist/js/main.min.js"></script>
+</body>
+</html>
