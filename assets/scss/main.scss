@@ -1,0 +1,142 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+$f:'Indie Flower', cursive;
+
+
+
+$cw: white;
+/* website */
+h1,h4,h5{
+	
+	color: $cw;
+}
+
+h1{
+	font-family: $f;
+}
+
+#poro{
+	width:100px;
+}
+
+.colonne{
+	height:600px;
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+	overflow-y: scroll;
+	width: 90%;
+}
+
+li {
+	list-style:none;
+}
+
+.horloge{
+	width:80%;
+	margin: 20px 0;
+}
+
+.btn{
+	margin: 10px 0;
+}
+
+li{
+	padding: 10px 20px;
+	list-style:none;
+}
+
+label{
+	font-size: 25px;
+}
+
+.material-icons{
+	float: right;
+}
+
+
+h5{
+	padding:0;
+	margin:0;
+	border-bottom: 1px solid white;
+}
+
+.hidden{
+	display: none;
+}
+
+
+
+
+
+input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
+	-webkit-box-shadow: 0 1px 0 0 #1976d2;
+	border-bottom: 1px solid #1976d2;
+	box-shadow: 0 1px 0 0 #1976d2;
+}
+
+input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser-default):focus:not([readonly]) + label, input[type="password"]:not(.browser-default):focus:not([readonly]) + label, input[type="email"]:not(.browser-default):focus:not([readonly]) + label, input[type="url"]:not(.browser-default):focus:not([readonly]) + label, input[type="time"]:not(.browser-default):focus:not([readonly]) + label, input[type="date"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, input[type="number"]:not(.browser-default):focus:not([readonly]) + label, input[type="search"]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label{
+	color: #1976d2;
+}
+
+
+
+
+// TIMER 
+
+#clockdiv{
+	font-family: sans-serif;
+	color: #1976d2;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+	font-size: 30px;
+}
+
+#clockdiv > div{
+	padding: 10px;
+	border-radius: 3px;
+	background: white;
+	display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 15px;
+	border-radius: 3px;
+	background: #1976d2;
+	display: inline-block;
+	color: white;
+}
+
+.smalltext{
+	padding-top: 5px;
+	font-size: 16px;
+}
+
+
+
+// Countdown timer FLIPCLOCK
+// .flip{
+// 	li{padding:0;}
+// }
+// .flip-clock-active{
+// 	background: none;
+// }
+
+// .your-clock{
+// 	width:100%;
+// }
+
+// .flip-clock-wrapper ul li a div div.inn{
+// 	background: white;
+// 	color:#1976d2;
+// }
+
+// .flip-clock-dot{
+// 	background: white;
+// }
+
+// .flip-clock-divider .flip-clock-label{
+// 	color:white;
+// }
