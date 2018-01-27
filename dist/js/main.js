@@ -5,8 +5,9 @@ var addButton = document.getElementById('add');
 var endButton = document.getElementById('end-btn')
 var tacheEnCours = document.getElementById('enCours');
 var todo = document.getElementById('todo');
-var x = null;
-var y = null;
+var timer = document.getElementById('timer');
+var completed = document.getElementById('tacheEnd');
+
 
 /*******************************************************/
 
@@ -36,45 +37,38 @@ function increment(){
 // function ajout d'une tache dans la liste de gauche 
 function addItem() {
 
-	increment(); n
+	increment(); 
 	var entree = task.value;
 	task.value=""; // permet de remettre à zero mon entrée 
 	var li = document.createElement("li"); 
-	// var checkBox = document.createElement("input");
 	var label = document.createElement("label");
 	var icon = document.createElement("i");
 	var datebox = document.createElement("p");
-
-    //Get the date
-    var d = new Date();
-    var day = d.getDate();
-    var month = d.getMonth()+1;
-    var year = d.getFullYear();
-    var hour = d.getHours();
-    var minutes = d.getMinutes();
-    var secondes = d.getSeconds();
-    var fulldate = day+'/'+month+'/'+year+' '+hour+'h'+minutes+':'+secondes ;
-    var temps1 = d.getTime();
+	var spanmin = document.createElement("span");
+	var spansec = document.createElement("span");
+	var dots = document.createElement("span");
 
 
     li.setAttribute("id", n);
     li.setAttribute('class','card')
-    // checkBox.setAttribute("type", "checkbox");
-    // checkBox.setAttribute("name", "checkbox");
-    // checkBox.setAttribute("class", "checkbox");
-    // checkBox.setAttribute("id", 'test'+n);
     datebox.setAttribute('class','datebox1 blue-text')
     label.setAttribute("for",'test'+n);
     label.setAttribute('class','indigo-text')
-    // label.setAttribute("onclick","enCours(this)")
     icon.setAttribute("class","material-icons blue-text text-darken-2")
     icon.setAttribute("onclick","supprimer(this)")
     icon.setAttribute("id", 'i'+n);
+    spanmin.setAttribute("id","spanmin")
+    spansec.setAttribute("id","spansec")
+    dots.innerHTML = " : ";
     label.innerHTML = entree; // pour que le appendChild fonctionne
-    datebox.innerHTML = 'Date de création : '+fulldate;
+    spanmin.innerHTML= '25';
+    spansec.innerHTML= '00';
+    datebox.innerHTML = ' Time :   ';
     icon.innerHTML = 'delete';
 
-    // li.appendChild(checkBox);
+    datebox.appendChild(spanmin);
+    datebox.appendChild(dots)
+    datebox.appendChild(spansec);
     li.appendChild(label);
     li.appendChild(icon);
     li.appendChild(datebox);
@@ -82,16 +76,14 @@ function addItem() {
 
     label.addEventListener('click',enCours);
 
-    
-
     Materialize.toast('Votre tâche a bien été ajoutée', 4000, 'blue-text text-darken-2 white')
 }
 
 /* Suppression task */
-function supprimer(test) {
+function supprimer(el) {
 	
 	if (window.confirm('Supprimer cette tache ?')){
-		test.parentNode.remove();
+		el.parentNode.remove();
 	}
 };
 
@@ -113,10 +105,12 @@ function enCours(){
 		else {
 			todo.appendChild(tacheEnCours.childNodes[0]);
 			tacheEnCours.appendChild(this.parentNode)
+			reset();
 		}
 	}
 	else{
 		todo.appendChild(tacheEnCours.childNodes[0]);
+		reset();
 	}
 }
 
@@ -125,6 +119,7 @@ function test(){
 }
 
 function moveEnd(end){
+	reset();
 	var encours = document.getElementById('enCours').firstChild;
 	var tacheEnd = document.getElementById('tacheEnd');
 	tacheEnd.appendChild(encours)
@@ -143,16 +138,17 @@ function taskEnd(){
 
 var play = document.getElementById('play')
 var pause = document.getElementById('pause')
-var continu = document.getElementById('continue')
-var restart = document.getElementById('restart')
+var resume = document.getElementById('resume')
+var exit = document.getElementById('exit')
 play.addEventListener("click",start);
 pause.addEventListener("click",stop);
-restart.addEventListener("click",reset);
+exit.addEventListener("click",reset);
+resume.addEventListener("click",truc)
 
 var clock = document.getElementById('clockdiv');
 var minutesSpan = document.getElementById('min');
 var secondsSpan = document.getElementById('sec');
-/*******************************************************************************************/
+
 var myvar;
 
 
@@ -165,6 +161,8 @@ function start(){
 		var launch =  new Date(Date.parse(new Date()) + 25 * 60 * 1000 );
 		play.classList.add('hidden');
 		pause.classList.remove('hidden')
+
+		console.log(tacheEnCours.firstChild.lastChild);
 
 		setDate();
 		function setDate(){
@@ -191,19 +189,63 @@ function start(){
 
 function stop(){
 	clearTimeout(myvar);
-	continu.classList.remove('hidden');
-	restart.classList.remove('hidden');
-	pause.classList.add('hidden')
+	resume.classList.remove('hidden');
+	exit.classList.remove('hidden');
+	pause.classList.add('hidden');
+	console.log(minutesSpan.innerHTML+' '+secondsSpan.innerHTML);
+
+	// tacheEnCours.firstChild.lastChild.innerHTML = "Time : "+minutesSpan.innerHTML+' : '+secondsSpan.innerHTML
+	tacheEnCours.firstChild.lastChild.children[0].innerHTML = minutesSpan.innerHTML
+	tacheEnCours.firstChild.lastChild.children[2].innerHTML = secondsSpan.innerHTML
 }
 
 function reset(){
+	clearTimeout(myvar);
 	minutesSpan.innerHTML = "25";
 	secondsSpan.innerHTML = "00";
-	continu.classList.add('hidden');
-	restart.classList.add('hidden');
+	resume.classList.add('hidden');
+	exit.classList.add('hidden');
 	play.classList.remove('hidden')
+	pause.classList.add('hidden')
 }
 
+function truc(){
+	resume.classList.add('hidden');
+	exit.classList.add('hidden');
+	pause.classList.remove('hidden')
+
+    setDate2();
+		function setDate2(){
+			var x = parseInt(minutesSpan.innerHTML)
+	        var y = parseInt(secondsSpan.innerHTML)
+			// var now = new Date();
+			var s = (x*60+y);
+
+			var m = Math.floor(s/60);
+			minutesSpan.innerHTML = m
+			s-=m*60;
+
+			s--;
+
+			s = Math.floor(s)
+			secondsSpan.innerHTML = s;
+			console.log(s);
+
+			myvar = setTimeout(setDate2,1000);
+
+			if (s == 0){
+				console.log("FIN DU MONDE");
+				clearTimeout(myvar);
+			}
+		}
+}
+
+function securite(){
+	if (tacheEnCours.childElementCount === 0){
+		console.log("secure");
+		reset();
+	}
+}
 
 
 /****************************************************************************************/
@@ -286,3 +328,39 @@ function reset(){
 
 // console.log(clock.getTime().time);
 
+
+
+
+$(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
+
+
+
+/**** event responsive menu ****/
+
+var one = document.getElementById('one')
+var two = document.getElementById('two')
+var three = document.getElementById('three')
+
+one.addEventListener('click',test1)
+two.addEventListener('click',test2)
+three.addEventListener('click',test3)
+
+function test1(){
+	todo.classList.remove('hidden')
+	timer.classList.add('hidden')
+	completed.classList.add('hidden')
+}
+
+function test2(){
+	todo.classList.add('hidden')
+	timer.classList.remove('hidden')
+	completed.classList.add('hidden')
+}
+
+function test3(){
+	todo.classList.add('hidden')
+	timer.classList.add('hidden')
+	completed.classList.remove('hidden')
+}
