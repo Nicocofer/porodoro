@@ -55,7 +55,6 @@ function addItem() {
     label.setAttribute("for",'test'+n);
     label.setAttribute('class','indigo-text')
     icon.setAttribute("class","material-icons blue-text text-darken-2")
-    icon.setAttribute("onclick","supprimer(this)")
     icon.setAttribute("id", 'i'+n);
     spanmin.setAttribute("id","spanmin")
     spansec.setAttribute("id","spansec")
@@ -74,17 +73,22 @@ function addItem() {
     li.appendChild(datebox);
     document.getElementById('todo').appendChild(li);
 
+    icon.addEventListener('click',supprimer)
     label.addEventListener('click',enCours);
 
     Materialize.toast('Votre tâche a bien été ajoutée', 4000, 'blue-text text-darken-2 white')
 }
 
 /* Suppression task */
-function supprimer(el) {
-	
-	if (window.confirm('Supprimer cette tache ?')){
-		el.parentNode.remove();
-	}
+function supprimer() {
+	var asuppr = this.parentNode
+  $('#modal1').modal('open');
+  document.getElementById('deltask').addEventListener('click', function(){
+  	asuppr.remove();
+  })
+	// if (window.confirm('Supprimer cette tache ?')){
+	// 	this.parentNode.remove();
+	// }
 };
 
 
@@ -328,13 +332,18 @@ function securite(){
 
 // console.log(clock.getTime().time);
 
-
+/*** Materialize fonction ***/
 
 
 $(document).ready(function(){
     $('ul.tabs').tabs();
   });
 
+
+  $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
 
 
 /**** event responsive menu ****/
